@@ -1,0 +1,14 @@
+{
+  "name": "tweeta",
+  "version": "1.0.0",
+  "description": "A twitter clone project to undersatnd nodejs, socketio, and mongoDB",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Yasir Gaji ",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
