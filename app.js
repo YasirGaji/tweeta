@@ -3,8 +3,18 @@ const app = express();
 const port = 3003;
 const middleware = require('./middleware');
 const path = require('path');
-const bodyParser = require("body-parser")
-
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose
+  .connect(
+    'mongodb+srv://gajiyasir_db_user:LBiOMnCSD9Uv2Xvu@tweeta0.u3w9zut.mongodb.net/?retryWrites=true&w=majority&appName=tweeta0'
+  )
+  .then(() => {
+    console.log('the bluetooth device is connected all successfully');
+  })
+  .catch((error) => {
+    console.log('the bluetooth device is not connected ' + error);
+  });
 
 const server = app.listen(port, () => console.log('yo ' + port));
 
