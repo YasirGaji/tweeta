@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 const User = require('../schemas/UserSchema');
 const bcrypt = require('bcrypt');
 
-
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
@@ -35,14 +34,12 @@ router.post('/', async (req, res, next) => {
 
     if (user == null) {
       var data = req.body;
-      data.password = await bcrypt.hash(password, 10)
+      data.password = await bcrypt.hash(password, 10);
 
-
-      User.create(data)
-      .then((user) => {
-        console.log(user)
-      })
-
+      User.create(data).then((user) => {
+        req.session.user = user;
+        return res.redirect('/');
+      });
     } else {
       if (email == user.email) {
         payload.errorMessage = 'Email already in use';
