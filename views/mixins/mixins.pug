@@ -1,4 +1,8 @@
-mixin createPostForm()
+mixin createPostForm(userLoggedIn)
   .postFormContainer 
     .userImageContainer 
-     img(src="", alt="")
+      img(src=userLoggedIn.profilePic, alt="user's profile picture")
+    .textareaContainer 
+      textarea#postTextarea(placeholder="What's happening?") 
+      .buttonContainer 
+        button
