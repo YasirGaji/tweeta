@@ -24,11 +24,13 @@ $("#submitPostButton").click(() => {
   }
 
   $.post("/api/posts", data, (postData, status, xhr) => {
-    if (xhr.status != 201) {
-      alert("Could not post tweet");
-      return;
-    }
 
-    location.reload();
+    alert(postData);
+    // if (xhr.status != 201) {
+    //   alert("Could not post tweet");
+    //   return;
+    // }
+
+    // location.reload();
   })
 })
