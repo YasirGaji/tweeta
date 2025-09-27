@@ -20,12 +20,12 @@ $("#submitPostButton").click(() => {
   var textbox = $("#postTextarea");
 
   var data = {
-    content: ''
+    content: textbox.val()
   }
 
   $.post("/api/posts", data, (postData, status, xhr) => {
 
-    alert(postData);
+    console.log(postData);
     // if (xhr.status != 201) {
     //   alert("Could not post tweet");
     //   return;
