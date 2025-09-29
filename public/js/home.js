@@ -1,3 +1,3 @@
-$(document).ready(() => {
-  alert("home.js loaded");
+$.get('/api/posts', (posts) => {
+  console.log(posts);
 });

@@ -23,12 +23,6 @@ $('#submitPostButton').click(() => {
   };
 
   $.post('/api/posts', data, (postData, status, xhr) => {
-    // if (xhr.status != 201) {
-    //   alert("Could not post tweet");
-    //   return;
-    // }
-
-    // location.reload();
 
     var html = createPostHtml(postData);
     $('.postsContainer').prepend(html);
