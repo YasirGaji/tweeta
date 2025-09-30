@@ -23,12 +23,6 @@ $('#submitPostButton').click(() => {
   };
 
   $.post('/api/posts', data, (postData, status, xhr) => {
-    // if (xhr.status != 201) {
-    //   alert("Could not post tweet");
-    //   return;
-    // }
-
-    // location.reload();
 
     var html = createPostHtml(postData);
     $('.postsContainer').prepend(html);
@@ -39,14 +33,13 @@ $('#submitPostButton').click(() => {
 
 function createPostHtml(postData) {
   const postedBy = postData.postedBy;
+
+  if(postedBy._id === undefined) {
+    return console.log("User object not populated");
+  }
+
   const displayName = `${postedBy.firstName} ${postedBy.lastName}`;
-  const timestamp = postData.createdAt;
-  const date = new Date(timestamp);
-  const formattedDate = date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  });
+  const timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
   return `
     <div class='post'>
@@ -59,7 +52,7 @@ function createPostHtml(postData) {
           <div class='header'>
             <a href='/profile/${postedBy.username}' class='displayName'>${displayName}</a>
             <span class='username'>@${postedBy.username}</span>
-            <span class='date'>${formattedDate}</span>
+            <span class='date'>${timestamp}</span>
           </div>
 
           <div class='postBody'>
@@ -92,4 +85,39 @@ function createPostHtml(postData) {
       </div>
     </div>
   `;
+}
+
+function timeDifference(current, previous) {
+  var msPerMinute = 60 * 1000;
+  var msPerHour = msPerMinute * 60;
+  var msPerDay = msPerHour * 24;
+  var msPerMonth = msPerDay * 30;
+  var msPerYear = msPerDay * 365;
+
+  var elapsed = current - previous;
+
+  if (elapsed < msPerMinute) {
+       if (elapsed/1000 < 30) return "Just now";
+       return Math.round(elapsed/1000) + ' seconds ago';
+  }
+
+  else if (elapsed < msPerHour) {
+       return Math.round(elapsed/msPerMinute) + ' minutes ago';
+  }
+
+  else if (elapsed < msPerDay ) {
+       return Math.round(elapsed/msPerHour ) + ' hours ago';
+  }
+
+  else if (elapsed < msPerMonth) {
+      return Math.round(elapsed/msPerDay) + ' days ago';
+  }
+
+  else if (elapsed < msPerYear) {
+      return Math.round(elapsed/msPerMonth) + ' months ago';
+  }
+
+  else {
+      return Math.round(elapsed/msPerYear ) + ' years ago';
+  }
 }
