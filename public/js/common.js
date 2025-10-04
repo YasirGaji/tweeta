@@ -31,7 +31,7 @@ $('#submitPostButton').click(() => {
   });
 });
 
-$(".likeButton").click(() => {
+$(document).on("click", ".likeButton", () => {
   console.log("like button clicked");
 });
 
