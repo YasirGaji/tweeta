@@ -46,7 +46,7 @@ function createPostHtml(postData) {
   const timestamp = timeDifference(new Date(), new Date(postData.createdAt));
 
   return `
-    <div class='post'>
+    <div class='post' data-id='${postData._id}'>
       <div class='mainContentContainer'>
         <div class='userImageContainer'>
           <img src='${postedBy.profilePic}'>
