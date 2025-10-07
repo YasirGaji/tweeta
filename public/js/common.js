@@ -38,9 +38,9 @@ $(document).on("click", ".likeButton", () => {
 function createPostHtml(postData) {
   const postedBy = postData.postedBy;
 
-  if(postedBy._id === undefined) {
-    return console.log("User object not populated");
-  }
+  // if(postedBy._id === undefined) {
+  //   return console.log("User object not populated");
+  // }
 
   const displayName = `${postedBy.firstName} ${postedBy.lastName}`;
   const timestamp = timeDifference(new Date(), new Date(postData.createdAt));
